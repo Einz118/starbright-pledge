@@ -51,12 +51,22 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        // Celestial colors
         star: "hsl(var(--star))",
         "star-glow": "hsl(var(--star-glow))",
-        pollution: "hsl(var(--pollution))",
+        "deep-navy": "hsl(var(--deep-navy))",
+        "cosmic-purple": "hsl(var(--cosmic-purple))",
+        // Pollution colors
+        "pollution-amber": "hsl(var(--pollution-amber))",
+        "pollution-red": "hsl(var(--pollution-red))",
+        "pollution-smog": "hsl(var(--pollution-smog))",
+        // Hope colors
         hope: "hsl(var(--hope))",
-        smog: "hsl(var(--smog))",
-        "deep-space": "hsl(var(--deep-space))",
+        "clean-air": "hsl(var(--clean-air))",
+        // Layer colors
+        microplastic: "hsl(var(--microplastic))",
+        "smog-layer": "hsl(var(--smog-layer))",
+        "light-glare": "hsl(var(--light-glare))",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -88,6 +98,16 @@ export default {
           "0%": { backgroundPosition: "-200% 0" },
           "100%": { backgroundPosition: "200% 0" },
         },
+        "shell-shatter": {
+          "0%": { transform: "scale(1)", opacity: "1" },
+          "50%": { transform: "scale(1.3)", opacity: "0.5" },
+          "100%": { transform: "scale(0)", opacity: "0" },
+        },
+        "star-brighten": {
+          "0%": { filter: "brightness(0.3)" },
+          "50%": { filter: "brightness(2)" },
+          "100%": { filter: "brightness(1.2)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -96,10 +116,13 @@ export default {
         "fade-in-up": "fade-in-up 0.8s ease-out forwards",
         "scale-in": "scale-in 0.5s ease-out forwards",
         shimmer: "shimmer 2s linear infinite",
+        "shell-shatter": "shell-shatter 0.5s ease-out forwards",
+        "star-brighten": "star-brighten 0.8s ease-out forwards",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "space-gradient": "var(--gradient-space)",
+        "cosmic-gradient": "var(--gradient-cosmic)",
       },
     },
   },

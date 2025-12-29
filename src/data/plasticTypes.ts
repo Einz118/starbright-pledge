@@ -7,7 +7,10 @@ export interface PlasticType {
   impact: string;
   pollutionFact: string;
   recyclingRate: string;
+  pledge: string;
+  pledgeFact: string;
   position: { x: number; y: number };
+  shellShape: string;
 }
 
 export const plasticTypes: PlasticType[] = [
@@ -20,7 +23,10 @@ export const plasticTypes: PlasticType[] = [
     impact: "Takes 450+ years to decompose. Releases microplastics into air and water.",
     pollutionFact: "PET microfibers from synthetic clothing contribute to atmospheric haze, scattering starlight.",
     recyclingRate: "Only 29% recycled globally",
+    pledge: "Use a reusable bottle for a week",
+    pledgeFact: "One reusable bottle can save ~150 plastic bottles per year.",
     position: { x: 50, y: 15 },
+    shellShape: "bottle",
   },
   {
     id: 2,
@@ -31,7 +37,10 @@ export const plasticTypes: PlasticType[] = [
     impact: "Releases harmful chemicals when exposed to UV light.",
     pollutionFact: "HDPE particles become airborne, adding to light-scattering pollution layers.",
     recyclingRate: "About 30% recycled",
+    pledge: "Bring reusable bags for grocery shopping",
+    pledgeFact: "A single reusable bag replaces 500+ plastic bags in its lifetime.",
     position: { x: 42, y: 28 },
+    shellShape: "jug",
   },
   {
     id: 3,
@@ -42,7 +51,10 @@ export const plasticTypes: PlasticType[] = [
     impact: "Most hazardous plastic. Releases dioxins when burned.",
     pollutionFact: "Burning PVC releases dense smoke that creates persistent smog layers.",
     recyclingRate: "Less than 1% recycled",
+    pledge: "Choose PVC-free products when possible",
+    pledgeFact: "Avoiding PVC reduces demand for one of the most toxic plastics.",
     position: { x: 38, y: 42 },
+    shellShape: "pipe",
   },
   {
     id: 4,
@@ -53,7 +65,10 @@ export const plasticTypes: PlasticType[] = [
     impact: "Lightweight fragments travel vast distances through atmosphere.",
     pollutionFact: "LDPE particles remain suspended in air, creating a veil that dims starlight.",
     recyclingRate: "About 6% recycled",
+    pledge: "Skip the plastic wrap, use beeswax wraps",
+    pledgeFact: "Beeswax wraps last a year and replace hundreds of plastic wrap uses.",
     position: { x: 55, y: 38 },
+    shellShape: "wrap",
   },
   {
     id: 5,
@@ -64,7 +79,10 @@ export const plasticTypes: PlasticType[] = [
     impact: "Breaks into microplastics that contaminate soil and water.",
     pollutionFact: "PP microplastics become airborne, contributing to atmospheric pollution.",
     recyclingRate: "Less than 5% recycled",
+    pledge: "Say no to plastic straws",
+    pledgeFact: "One person skipping straws saves ~500 straws per year.",
     position: { x: 62, y: 52 },
+    shellShape: "straw",
   },
   {
     id: 6,
@@ -75,7 +93,10 @@ export const plasticTypes: PlasticType[] = [
     impact: "Extremely difficult to recycle. Toxic when burned.",
     pollutionFact: "Burning polystyrene releases black carbon, blocking starlight at the source.",
     recyclingRate: "Less than 1% recycled",
+    pledge: "Refuse styrofoam containers",
+    pledgeFact: "Styrofoam never fully degrades—every piece ever made still exists.",
     position: { x: 48, y: 62 },
+    shellShape: "cup",
   },
   {
     id: 7,
@@ -86,7 +107,10 @@ export const plasticTypes: PlasticType[] = [
     impact: "Often contains BPA and other harmful chemicals.",
     pollutionFact: "Complex plastics create the most persistent atmospheric pollutants.",
     recyclingRate: "Rarely recycled",
+    pledge: "Choose products with simple, recyclable materials",
+    pledgeFact: "Simpler plastics are 10x more likely to actually get recycled.",
     position: { x: 35, y: 58 },
+    shellShape: "disc",
   },
 ];
 

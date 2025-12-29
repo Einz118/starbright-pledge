@@ -35,8 +35,8 @@ export const ActionSection = () => {
   const handleShare = () => {
     if (navigator.share) {
       navigator.share({
-        title: "The Fading Stars Project",
-        text: "When Stars Disappear, Our Plastic is the Reason. Join me in becoming a Starkeeper!",
+        title: "The Obscured Sky",
+        text: "Become a Starkeeper and help restore the fading constellations!",
         url: window.location.href,
       });
     } else {

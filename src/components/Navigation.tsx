@@ -3,10 +3,10 @@ import { Star, Menu, X } from "lucide-react";
 import { useState } from "react";
 
 const navLinks = [
-  { href: "#constellation", label: "The Constellation" },
-  { href: "#story", label: "Our Story" },
-  { href: "#learn", label: "Learn" },
-  { href: "#showcase", label: "Showcase" },
+  { href: "#pollution-journey", label: "The Journey" },
+  { href: "#constellation", label: "Lost Dipper" },
+  { href: "#learn", label: "Library" },
+  { href: "#showcase", label: "Impact" },
   { href: "#action", label: "Take Action" },
 ];
 
@@ -24,11 +24,10 @@ export const Navigation = () => {
         <a href="#" className="flex items-center gap-2 group">
           <Star className="w-6 h-6 text-star-glow group-hover:animate-pulse-glow transition-all" />
           <span className="font-display font-bold text-lg text-foreground">
-            Fading Stars
+            The Obscured Sky
           </span>
         </a>
 
-        {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
             <a
@@ -42,16 +41,11 @@ export const Navigation = () => {
           ))}
         </div>
 
-        {/* Mobile Menu Button */}
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden text-foreground p-2"
-        >
+        <button onClick={() => setIsOpen(!isOpen)} className="md:hidden text-foreground p-2">
           {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
       </div>
 
-      {/* Mobile Menu */}
       {isOpen && (
         <motion.div
           initial={{ opacity: 0, y: -10 }}
