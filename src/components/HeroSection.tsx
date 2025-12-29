@@ -1,23 +1,26 @@
 import { motion } from "framer-motion";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Sparkles, BookOpen } from "lucide-react";
 
 export const HeroSection = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Gradient overlays */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-background z-10" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial from-star-glow/10 via-transparent to-transparent rounded-full blur-3xl" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/30 to-background z-10" />
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] bg-gradient-radial from-star-glow/8 via-transparent to-transparent rounded-full blur-3xl" />
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[1200px] h-[400px] bg-gradient-radial from-cosmic-purple/20 via-transparent to-transparent rounded-full blur-3xl" />
       
       {/* Content */}
-      <div className="relative z-20 text-center px-6 max-w-4xl mx-auto">
+      <div className="relative z-20 text-center px-6 max-w-5xl mx-auto">
+        {/* Starkeeper badge */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, ease: "easeOut" }}
           className="mb-8"
         >
-          <span className="inline-block px-4 py-2 rounded-full glass-card text-sm text-primary font-medium mb-6">
-            An Interactive STEAM Experience
+          <span className="starkeeper-badge text-sm font-medium">
+            <Sparkles className="w-4 h-4 text-hope" />
+            <span className="text-hope">A Starkeeper&apos;s Quest Awaits</span>
           </span>
         </motion.div>
 
@@ -28,48 +31,64 @@ export const HeroSection = () => {
           className="font-display text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight"
         >
           <span className="text-foreground">The </span>
-          <span className="text-glow bg-gradient-to-r from-star-glow via-primary to-hope bg-clip-text text-transparent">
-            Fading Stars
+          <span className="text-glow bg-gradient-to-r from-star-glow via-primary to-clean-air bg-clip-text text-transparent">
+            Obscured Sky
           </span>
-          <span className="text-foreground"> Project</span>
         </motion.h1>
 
-        <motion.p
+        {/* Narrative voiceover text */}
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="text-xl md:text-2xl text-muted-foreground mb-4 font-display"
+          className="max-w-3xl mx-auto mb-8"
         >
-          When Stars Disappear, Our Plastic is the Reason.
-        </motion.p>
+          <p className="text-lg md:text-xl text-muted-foreground/90 leading-relaxed italic">
+            &ldquo;For millennia, humans told stories by the stars. But our modern world is writing 
+            a new story—one of fading lights. The stars are disappearing, not because they&apos;re gone, 
+            but because we&apos;ve put a veil between us and the cosmos.&rdquo;
+          </p>
+        </motion.div>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="text-lg text-muted-foreground/80 max-w-2xl mx-auto mb-12"
+          className="text-xl md:text-2xl text-foreground/80 font-display mb-4"
         >
-          Discover how 7 types of plastic are stealing the stars from our sky. 
-          An immersive journey through the cosmos and our pollution crisis.
+          That veil is made of <span className="text-pollution-amber">plastic</span>, <span className="text-pollution-smog">smoke</span>, and <span className="text-light-glare">wasted light</span>.
+        </motion.p>
+
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.8 }}
+          className="text-2xl md:text-3xl font-display font-bold text-hope mb-12"
+        >
+          You are needed, Starkeeper. Begin your quest.
         </motion.p>
 
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
+          transition={{ duration: 0.8, delay: 1 }}
           className="flex flex-col sm:flex-row gap-4 justify-center"
         >
           <a
-            href="#constellation"
-            className="px-8 py-4 rounded-full bg-primary text-primary-foreground font-display font-medium hover:bg-primary/90 transition-all hover:scale-105 hover:shadow-lg hover:shadow-primary/30"
+            href="#pollution-journey"
+            className="group px-8 py-4 rounded-full bg-gradient-to-r from-primary to-clean-air text-primary-foreground font-display font-medium hover:shadow-lg hover:shadow-primary/30 transition-all hover:scale-105"
           >
-            Explore the Constellation
+            <span className="flex items-center justify-center gap-2">
+              <Sparkles className="w-5 h-5" />
+              Begin Your Quest
+            </span>
           </a>
           <a
-            href="#story"
-            className="px-8 py-4 rounded-full glass-card text-foreground font-display font-medium hover:bg-secondary/50 transition-all hover:scale-105"
+            href="#resources"
+            className="px-8 py-4 rounded-full glass-card text-foreground font-display font-medium hover:bg-secondary/50 transition-all hover:scale-105 flex items-center justify-center gap-2"
           >
-            Learn the Story
+            <BookOpen className="w-5 h-5" />
+            For Educators
           </a>
         </motion.div>
       </div>
@@ -78,7 +97,7 @@ export const HeroSection = () => {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.2 }}
+        transition={{ delay: 1.5 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20"
       >
         <motion.div

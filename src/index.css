@@ -10,53 +10,66 @@
 
 @layer base {
   :root {
-    /* Deep space dark theme */
-    --background: 230 50% 5%;
+    /* The Obscured Sky - Enhanced celestial palette */
+    --background: 225 60% 4%;
     --foreground: 220 20% 95%;
 
-    --card: 230 45% 8%;
+    --card: 225 50% 7%;
     --card-foreground: 220 20% 95%;
 
-    --popover: 230 45% 8%;
+    --popover: 225 50% 7%;
     --popover-foreground: 220 20% 95%;
 
-    --primary: 200 80% 60%;
-    --primary-foreground: 230 50% 5%;
+    --primary: 195 85% 55%;
+    --primary-foreground: 225 60% 4%;
 
-    --secondary: 230 30% 15%;
+    --secondary: 225 35% 12%;
     --secondary-foreground: 220 20% 90%;
 
-    --muted: 230 25% 12%;
-    --muted-foreground: 220 15% 55%;
+    --muted: 225 30% 10%;
+    --muted-foreground: 220 15% 50%;
 
-    --accent: 35 90% 55%;
-    --accent-foreground: 230 50% 5%;
+    --accent: 45 95% 60%;
+    --accent-foreground: 225 60% 4%;
 
     --destructive: 0 70% 50%;
     --destructive-foreground: 220 20% 95%;
 
-    --border: 230 25% 18%;
-    --input: 230 25% 18%;
-    --ring: 200 80% 60%;
+    --border: 225 30% 15%;
+    --input: 225 30% 15%;
+    --ring: 195 85% 55%;
 
     --radius: 0.75rem;
 
-    /* Custom colors */
-    --star: 45 100% 90%;
-    --star-glow: 200 100% 80%;
-    --pollution: 35 90% 55%;
-    --hope: 180 70% 50%;
-    --smog: 220 10% 40%;
-    --deep-space: 230 60% 3%;
+    /* Custom celestial colors */
+    --star: 45 100% 92%;
+    --star-glow: 195 100% 75%;
+    --deep-navy: 225 65% 6%;
+    --cosmic-purple: 260 45% 25%;
+    
+    /* Pollution colors */
+    --pollution-amber: 35 100% 55%;
+    --pollution-red: 0 75% 60%;
+    --pollution-smog: 220 15% 35%;
+    
+    /* Hope/Action colors */
+    --hope: 170 75% 50%;
+    --clean-air: 185 80% 55%;
+    
+    /* Layer effects */
+    --microplastic: 280 40% 60%;
+    --smog-layer: 220 20% 50%;
+    --light-glare: 40 100% 65%;
 
     /* Gradients */
-    --gradient-space: linear-gradient(180deg, hsl(230 60% 3%) 0%, hsl(230 50% 8%) 50%, hsl(230 45% 12%) 100%);
-    --gradient-glow: radial-gradient(circle, hsl(200 100% 80% / 0.3) 0%, transparent 70%);
-    --gradient-pollution: radial-gradient(circle, hsl(35 90% 55% / 0.4) 0%, transparent 60%);
+    --gradient-space: linear-gradient(180deg, hsl(225 65% 3%) 0%, hsl(225 60% 6%) 50%, hsl(260 45% 12%) 100%);
+    --gradient-glow: radial-gradient(circle, hsl(195 100% 75% / 0.3) 0%, transparent 70%);
+    --gradient-pollution: radial-gradient(circle, hsl(35 100% 55% / 0.4) 0%, transparent 60%);
+    --gradient-cosmic: linear-gradient(135deg, hsl(225 65% 6%) 0%, hsl(260 45% 15%) 100%);
   }
 
   .dark {
-    --background: 230 50% 5%;
+    --background: 225 60% 4%;
     --foreground: 220 20% 95%;
   }
 }
@@ -98,7 +111,11 @@
   }
 
   .pollution-glow {
-    filter: drop-shadow(0 0 15px hsl(var(--pollution)));
+    filter: drop-shadow(0 0 15px hsl(var(--pollution-amber)));
+  }
+
+  .hope-glow {
+    filter: drop-shadow(0 0 12px hsl(var(--hope)));
   }
 
   .text-glow {
@@ -109,9 +126,52 @@
     @apply bg-card/40 backdrop-blur-xl border border-border/50 rounded-2xl;
   }
 
+  .glass-card-solid {
+    @apply bg-card/80 backdrop-blur-xl border border-border/60 rounded-2xl;
+  }
+
   .constellation-line {
     stroke: hsl(var(--star) / 0.3);
     stroke-width: 1;
+  }
+
+  /* Plastic shell styles */
+  .plastic-shell {
+    @apply relative;
+  }
+
+  .plastic-shell::before {
+    content: '';
+    @apply absolute inset-0 rounded-full;
+    background: linear-gradient(135deg, hsl(var(--pollution-amber) / 0.3), hsl(var(--pollution-red) / 0.2));
+    animation: shell-pulse 2s ease-in-out infinite;
+  }
+
+  /* Pollution layer effects */
+  .pollution-layer {
+    @apply pointer-events-none;
+    mix-blend-mode: screen;
+  }
+
+  .microplastic-layer {
+    background: radial-gradient(circle at 20% 30%, hsl(var(--microplastic) / 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 60%, hsl(var(--microplastic) / 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 50% 80%, hsl(var(--microplastic) / 0.12) 0%, transparent 45%);
+  }
+
+  .smog-layer {
+    background: linear-gradient(180deg, hsl(var(--smog-layer) / 0.2) 0%, hsl(var(--smog-layer) / 0.35) 50%, hsl(var(--smog-layer) / 0.15) 100%);
+  }
+
+  .light-glare-layer {
+    background: radial-gradient(ellipse at 50% 100%, hsl(var(--light-glare) / 0.3) 0%, transparent 60%);
+  }
+
+  /* Starkeeper badge */
+  .starkeeper-badge {
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-full;
+    background: linear-gradient(135deg, hsl(var(--hope) / 0.2), hsl(var(--clean-air) / 0.1));
+    border: 1px solid hsl(var(--hope) / 0.4);
   }
 }
 
@@ -145,11 +205,60 @@
     }
   }
 
+  @keyframes shell-pulse {
+    0%, 100% {
+      opacity: 0.6;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.9;
+      transform: scale(1.05);
+    }
+  }
+
+  @keyframes star-free {
+    0% {
+      transform: scale(1);
+      filter: drop-shadow(0 0 5px hsl(var(--star)));
+    }
+    50% {
+      transform: scale(1.5);
+      filter: drop-shadow(0 0 30px hsl(var(--star-glow)));
+    }
+    100% {
+      transform: scale(1);
+      filter: drop-shadow(0 0 15px hsl(var(--star-glow)));
+    }
+  }
+
+  @keyframes drift {
+    0%, 100% {
+      transform: translateX(0) translateY(0);
+    }
+    25% {
+      transform: translateX(5px) translateY(-3px);
+    }
+    50% {
+      transform: translateX(-3px) translateY(5px);
+    }
+    75% {
+      transform: translateX(3px) translateY(2px);
+    }
+  }
+
   .animate-float {
     animation: float 6s ease-in-out infinite;
   }
 
   .animate-pulse-glow {
     animation: pulse-glow 3s ease-in-out infinite;
+  }
+
+  .animate-star-free {
+    animation: star-free 0.8s ease-out forwards;
+  }
+
+  .animate-drift {
+    animation: drift 20s ease-in-out infinite;
   }
 }
