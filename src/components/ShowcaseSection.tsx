@@ -79,26 +79,6 @@ export const ShowcaseSection = () => {
           ))}
         </div>
 
-        {/* Testimonial */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mt-16 glass-card p-8 md:p-12 text-center"
-        >
-          <blockquote className="font-display text-xl md:text-2xl text-foreground mb-6 italic">
-            "After the workshop, I look at the night sky differently. I never knew my water bottle 
-            could be connected to why I can't see as many stars."
-          </blockquote>
-          <p className="text-muted-foreground">
-            — Maya, 14, Workshop Participant
-          </p>
-          <div className="mt-6 pt-6 border-t border-border">
-            <p className="text-primary font-display font-medium">
-              ~80% of students reported improved understanding of pollution's impact
-            </p>
-          </div>
-        </motion.div>
       </div>
     </section>
   );
