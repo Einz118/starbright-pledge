@@ -1,42 +1,45 @@
-import { motion } from "framer-motion";
-import { Play, FileText, Lightbulb, Wind, Recycle, Eye, Heart } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Play, FileText, Heart, X, ZoomIn } from "lucide-react";
 import { useState } from "react";
+
+// Import infographic images
+import airQualityStars from "@/assets/infographics/air-quality-stars.jpg";
+import lightPollution101 from "@/assets/infographics/light-pollution-101.jpg";
+import recyclingMyths from "@/assets/infographics/recycling-myths.jpg";
+import plasticLifecycle from "@/assets/infographics/plastic-lifecycle.jpg";
 
 const infographics = [
   {
     id: 1,
     title: "The Plastic Lifecycle",
-    description: "From production to airborne microplastics—how plastic travels from factory to atmosphere.",
-    icon: Recycle,
-    color: "text-hope",
+    subtitle: "From Product to the Air We Breathe",
+    description: "Discover how plastic breaks down into microplastics and enters our atmosphere.",
+    image: plasticLifecycle,
+    color: "from-cyan-500 to-blue-600",
   },
   {
     id: 2,
     title: "Light Pollution 101",
-    description: "How artificial lights scatter into the atmosphere, creating a dome of wasted energy.",
-    icon: Lightbulb,
-    color: "text-pollution",
+    subtitle: "When the Night is No Longer Dark",
+    description: "Learn how artificial light escapes into the sky and creates the 'skyglow' effect.",
+    image: lightPollution101,
+    color: "from-amber-500 to-orange-600",
   },
   {
     id: 3,
     title: "Air Quality & Stars",
-    description: "PM2.5, smog, and particulates—the science of how pollutants scatter starlight.",
-    icon: Wind,
-    color: "text-smog",
+    subtitle: "When the Sky Becomes a Dirty Lens",
+    description: "Understand how PM2.5 and air pollution scatter starlight and dim our view.",
+    image: airQualityStars,
+    color: "from-purple-500 to-pink-600",
   },
   {
     id: 4,
     title: "Recycling Myths",
-    description: "What really happens to your recycling? Busting common misconceptions.",
-    icon: FileText,
-    color: "text-primary",
-  },
-  {
-    id: 5,
-    title: "Restore the Night",
-    description: "Positive actions that can bring back star visibility in your community.",
-    icon: Eye,
-    color: "text-star-glow",
+    subtitle: "Why Good Intentions Are Not Always Enough",
+    description: "Uncover the truth about what really happens to plastic after we recycle.",
+    image: recyclingMyths,
+    color: "from-emerald-500 to-teal-600",
   },
 ];
 
@@ -59,6 +62,7 @@ const videos = [
 
 export const LearnSection = () => {
   const [activeVideo, setActiveVideo] = useState<number | null>(null);
+  const [selectedInfographic, setSelectedInfographic] = useState<number | null>(null);
 
   return (
     <section id="learn" className="relative py-32 px-6">
@@ -83,7 +87,7 @@ export const LearnSection = () => {
             <FileText className="w-6 h-6 text-primary" />
             Infographic Gallery
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {infographics.map((info, index) => (
               <motion.div
                 key={info.id}
@@ -91,11 +95,35 @@ export const LearnSection = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="glass-card p-6 hover:bg-secondary/30 transition-all group cursor-pointer"
+                className="group relative overflow-hidden rounded-2xl cursor-pointer"
+                onClick={() => setSelectedInfographic(info.id)}
               >
-                <info.icon className={`w-10 h-10 ${info.color} mb-4 group-hover:scale-110 transition-transform`} />
-                <h4 className="font-display text-lg font-bold mb-2">{info.title}</h4>
-                <p className="text-sm text-muted-foreground">{info.description}</p>
+                {/* Image */}
+                <div className="aspect-[3/4] overflow-hidden">
+                  <img 
+                    src={info.image} 
+                    alt={info.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                </div>
+                
+                {/* Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
+                
+                {/* Content */}
+                <div className="absolute bottom-0 left-0 right-0 p-6">
+                  <div className={`inline-block px-3 py-1 rounded-full text-xs font-bold text-white bg-gradient-to-r ${info.color} mb-3`}>
+                    Infographic {info.id}
+                  </div>
+                  <h4 className="font-display text-xl font-bold text-white mb-1">{info.title}</h4>
+                  <p className="text-sm text-white/80 mb-2">{info.subtitle}</p>
+                  <p className="text-sm text-white/60 line-clamp-2">{info.description}</p>
+                </div>
+                
+                {/* Zoom Icon */}
+                <div className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all transform group-hover:scale-100 scale-75">
+                  <ZoomIn className="w-5 h-5 text-white" />
+                </div>
               </motion.div>
             ))}
           </div>
@@ -136,33 +164,67 @@ export const LearnSection = () => {
           </div>
         </div>
 
-        {/* Video Modal placeholder */}
-        {activeVideo && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="fixed inset-0 bg-background/90 backdrop-blur-sm z-50 flex items-center justify-center p-6"
-            onClick={() => setActiveVideo(null)}
-          >
+        {/* Infographic Modal */}
+        <AnimatePresence>
+          {selectedInfographic && (
             <motion.div
-              initial={{ scale: 0.9 }}
-              animate={{ scale: 1 }}
-              className="glass-card p-8 max-w-2xl w-full text-center"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black/95 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+              onClick={() => setSelectedInfographic(null)}
             >
-              <Heart className="w-16 h-16 text-primary mx-auto mb-4" />
-              <h3 className="font-display text-2xl font-bold mb-2">Coming Soon!</h3>
-              <p className="text-muted-foreground mb-4">
-                Our educational videos are currently in production. Check back soon!
-              </p>
-              <button
-                onClick={() => setActiveVideo(null)}
-                className="px-6 py-2 rounded-full bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors"
+              <motion.button
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="absolute top-4 right-4 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors z-10"
+                onClick={() => setSelectedInfographic(null)}
               >
-                Close
-              </button>
+                <X className="w-6 h-6 text-white" />
+              </motion.button>
+              <motion.img
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.9, opacity: 0 }}
+                src={infographics.find(i => i.id === selectedInfographic)?.image}
+                alt={infographics.find(i => i.id === selectedInfographic)?.title}
+                className="max-w-full max-h-[90vh] object-contain rounded-lg"
+                onClick={(e) => e.stopPropagation()}
+              />
             </motion.div>
-          </motion.div>
-        )}
+          )}
+        </AnimatePresence>
+
+        {/* Video Modal placeholder */}
+        <AnimatePresence>
+          {activeVideo && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-background/90 backdrop-blur-sm z-50 flex items-center justify-center p-6"
+              onClick={() => setActiveVideo(null)}
+            >
+              <motion.div
+                initial={{ scale: 0.9 }}
+                animate={{ scale: 1 }}
+                className="glass-card p-8 max-w-2xl w-full text-center"
+              >
+                <Heart className="w-16 h-16 text-primary mx-auto mb-4" />
+                <h3 className="font-display text-2xl font-bold mb-2">Coming Soon!</h3>
+                <p className="text-muted-foreground mb-4">
+                  Our educational videos are currently in production. Check back soon!
+                </p>
+                <button
+                  onClick={() => setActiveVideo(null)}
+                  className="px-6 py-2 rounded-full bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors"
+                >
+                  Close
+                </button>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </section>
   );
