@@ -8,8 +8,9 @@ import lightPollution101 from "@/assets/infographics/light-pollution-101.jpg";
 import recyclingMyths from "@/assets/infographics/recycling-myths.jpg";
 import plasticLifecycle from "@/assets/infographics/plastic-lifecycle.jpg";
 
-// Import video
+// Import videos
 import starsStoryVideo from "@/assets/videos/stars-story.mp4";
+import plasticPatrolVideo from "@/assets/videos/plastic-patrol.mp4";
 
 const infographics = [
   {
@@ -61,7 +62,7 @@ const videos = [
     description: "Join our young host to learn 7 easy ways to reduce plastic and light pollution at home and school.",
     duration: "5:15",
     thumbnail: "live",
-    videoSrc: null, // Coming soon
+    videoSrc: plasticPatrolVideo,
   },
 ];
 
