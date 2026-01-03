@@ -152,12 +152,25 @@ export const LearnSection = () => {
                 className="glass-card overflow-hidden group cursor-pointer"
                 onClick={() => setActiveVideo(video.id)}
               >
-                <div className="relative aspect-video bg-gradient-to-br from-secondary to-muted flex items-center justify-center">
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
-                  <div className="w-16 h-16 rounded-full bg-primary/20 backdrop-blur-sm flex items-center justify-center group-hover:bg-primary/40 transition-all group-hover:scale-110">
+                <div className="relative aspect-video bg-gradient-to-br from-secondary to-muted flex items-center justify-center overflow-hidden">
+                  {video.videoSrc && (
+                    <video
+                      src={video.videoSrc}
+                      muted
+                      playsInline
+                      preload="metadata"
+                      className="absolute inset-0 w-full h-full object-cover"
+                      onLoadedMetadata={(e) => {
+                        const videoEl = e.currentTarget;
+                        videoEl.currentTime = 1; // Show frame at 1 second
+                      }}
+                    />
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-transparent" />
+                  <div className="relative z-10 w-16 h-16 rounded-full bg-primary/20 backdrop-blur-sm flex items-center justify-center group-hover:bg-primary/40 transition-all group-hover:scale-110">
                     <Play className="w-8 h-8 text-primary fill-primary" />
                   </div>
-                  <span className="absolute bottom-4 right-4 text-sm text-muted-foreground bg-background/60 px-2 py-1 rounded">
+                  <span className="absolute bottom-4 right-4 text-sm text-white/90 bg-black/60 px-2 py-1 rounded z-10">
                     {video.duration}
                   </span>
                 </div>
