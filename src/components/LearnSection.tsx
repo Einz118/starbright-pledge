@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { Play, FileText, Heart, X, ZoomIn } from "lucide-react";
+import { Play, FileText, X, ZoomIn } from "lucide-react";
 import { useState } from "react";
 
 // Import infographic images
@@ -7,6 +7,9 @@ import airQualityStars from "@/assets/infographics/air-quality-stars.jpg";
 import lightPollution101 from "@/assets/infographics/light-pollution-101.jpg";
 import recyclingMyths from "@/assets/infographics/recycling-myths.jpg";
 import plasticLifecycle from "@/assets/infographics/plastic-lifecycle.jpg";
+
+// Import video
+import starsStoryVideo from "@/assets/videos/stars-story.mp4";
 
 const infographics = [
   {
@@ -50,6 +53,7 @@ const videos = [
     description: "An animated journey following a curious star who wonders why fewer humans can see it each year.",
     duration: "4:30",
     thumbnail: "cartoon",
+    videoSrc: starsStoryVideo,
   },
   {
     id: 2,
@@ -57,6 +61,7 @@ const videos = [
     description: "Join our young host to learn 7 easy ways to reduce plastic and light pollution at home and school.",
     duration: "5:15",
     thumbnail: "live",
+    videoSrc: null, // Coming soon
   },
 ];
 
@@ -195,33 +200,70 @@ export const LearnSection = () => {
           )}
         </AnimatePresence>
 
-        {/* Video Modal placeholder */}
+        {/* Video Modal */}
         <AnimatePresence>
           {activeVideo && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-background/90 backdrop-blur-sm z-50 flex items-center justify-center p-6"
+              className="fixed inset-0 bg-black/95 backdrop-blur-sm z-50 flex items-center justify-center p-4"
               onClick={() => setActiveVideo(null)}
             >
-              <motion.div
-                initial={{ scale: 0.9 }}
-                animate={{ scale: 1 }}
-                className="glass-card p-8 max-w-2xl w-full text-center"
+              <motion.button
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="absolute top-4 right-4 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors z-10"
+                onClick={() => setActiveVideo(null)}
               >
-                <Heart className="w-16 h-16 text-primary mx-auto mb-4" />
-                <h3 className="font-display text-2xl font-bold mb-2">Coming Soon!</h3>
-                <p className="text-muted-foreground mb-4">
-                  Our educational videos are currently in production. Check back soon!
-                </p>
-                <button
-                  onClick={() => setActiveVideo(null)}
-                  className="px-6 py-2 rounded-full bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors"
-                >
-                  Close
-                </button>
-              </motion.div>
+                <X className="w-6 h-6 text-white" />
+              </motion.button>
+              
+              {(() => {
+                const video = videos.find(v => v.id === activeVideo);
+                if (video?.videoSrc) {
+                  return (
+                    <motion.div
+                      initial={{ scale: 0.9, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      exit={{ scale: 0.9, opacity: 0 }}
+                      className="w-full max-w-4xl"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <video
+                        src={video.videoSrc}
+                        controls
+                        autoPlay
+                        className="w-full rounded-lg shadow-2xl"
+                      />
+                      <p className="text-center text-white/80 mt-4 font-display text-lg">
+                        {video.title}
+                      </p>
+                    </motion.div>
+                  );
+                } else {
+                  return (
+                    <motion.div
+                      initial={{ scale: 0.9 }}
+                      animate={{ scale: 1 }}
+                      className="glass-card p-8 max-w-2xl w-full text-center"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <Play className="w-16 h-16 text-primary mx-auto mb-4" />
+                      <h3 className="font-display text-2xl font-bold mb-2">Coming Soon!</h3>
+                      <p className="text-muted-foreground mb-4">
+                        This educational video is currently in production. Check back soon!
+                      </p>
+                      <button
+                        onClick={() => setActiveVideo(null)}
+                        className="px-6 py-2 rounded-full bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors"
+                      >
+                        Close
+                      </button>
+                    </motion.div>
+                  );
+                }
+              })()}
             </motion.div>
           )}
         </AnimatePresence>
